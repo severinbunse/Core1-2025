@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Core One</title>
-
-<style>
-    body {
-    	background-color: pink;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Image</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%; /* ensure body takes full height */
     }
-
-</style>
-	
+    body {
+      display: flex;
+      justify-content: center;  /* horizontal */
+      align-items: center;      /* vertical */
+      background-color: white;
+    }
+    img {
+      max-width: 60%;
+      max-height: 60%;
+    }
+  </style>
 </head>
 <body>
-<p>Hello World!</p>
+  <img src="images/dog-on-the-internet-by-peter-steiner.jpg" alt="Centered Image">
 </body>
 </html>
