@@ -1,5 +1,11 @@
 body {
     font-size: 30px;
+    background-size: auto 500px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: background-image 1s ease;
+
+    /* Flexbox for centering */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +20,7 @@ ul {
     margin: 0;
     text-align: center;
     display: inline-block;
-    line-height: 1; /* Adjust this number to control spacing */
+     line-height: 1; /* Adjust this number to control spacing */
 }
 
 li {
@@ -29,12 +35,4 @@ a {
 
 a:hover {
     font-style: italic;
-}
-
-@media (max-width: 600px) {
-    body {
-        font-size: 20px; /* Smaller text for mobile */
-        padding: 20px; /* Prevent text from touching edges */
-        margin: 0px;
-    }
 }
