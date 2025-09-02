@@ -36,3 +36,10 @@ a {
 a:hover {
     font-style: italic;
 }
+
+@media (max-width: 600px) {
+    body {
+        font-size: 20px; /* Smaller text for mobile */
+        padding: 20px; /* Prevent text from touching edges */
+    }
+}
