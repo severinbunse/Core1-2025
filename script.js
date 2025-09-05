@@ -7,23 +7,24 @@ nameItems.forEach((item) => {
     const link = item.querySelector('a');
 
     item.addEventListener('touchstart', (e) => {
-        // Only prevent default for the link to stop immediate navigation
-        if (e.target === link) e.preventDefault();
-
+        // Play audio
         audio.currentTime = 0;
         audio.play().catch(() => {});
 
+        // Apply hover effect by adding a class
         link.classList.add('hover-touch');
     });
 
     item.addEventListener('touchend', (e) => {
+        // Stop audio
         audio.pause();
         audio.currentTime = 0;
 
+        // Remove hover effect
         link.classList.remove('hover-touch');
 
-        // Navigate only if the touch ended on the link
-        if (e.target === link && link.href) {
+        // Navigate to link
+        if (link && link.href) {
             window.location = link.href;
         }
     });
