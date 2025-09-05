@@ -14,3 +14,15 @@ nameItems.forEach((item) => {
         audio.currentTime = 0; // Reset audio to the beginning
     });
 });
+
+// Mobile viewport height fix
+function setBodyHeight() {
+    document.body.style.height = window.innerHeight + "px";
+}
+
+// Run once on load
+setBodyHeight();
+
+// Update height on resize / orientation change
+window.addEventListener("resize", setBodyHeight);
+window.addEventListener("orientationchange", setBodyHeight);
