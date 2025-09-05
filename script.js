@@ -2,11 +2,12 @@
 const nameItems = document.querySelectorAll('.name-item');
 
 nameItems.forEach((item) => {
+    // Get audio file from data attribute
     const audio = new Audio(item.dataset.audio);
-    audio.preload = 'auto';
+    audio.preload = 'auto'; // preload for smoother playback
 
     // ------------------------
-    // Desktop: hover or click
+    // Desktop hover
     // ------------------------
     item.addEventListener('mouseenter', () => {
         audio.play().catch(() => {}); // play on hover
@@ -14,34 +15,37 @@ nameItems.forEach((item) => {
 
     item.addEventListener('mouseleave', () => {
         audio.pause();
-        audio.currentTime = 0;
-    });
-
-    item.addEventListener('click', () => {
-        audio.play().catch(() => {}); // play on click
+        audio.currentTime = 0; // reset audio
     });
 
     // ------------------------
-    // Mobile: right swipe
+    // Click / tap (desktop + mobile)
     // ------------------------
-    let startX = 0;
-    let startY = 0;
-
-    item.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    });
-
-    item.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY;
-
-        const dx = endX - startX;
-        const dy = endY - startY;
-
-        // Detect mostly horizontal swipe and to the right
-        if (Math.abs(dx) > Math.abs(dy) && dx > 50) { // adjust threshold as needed
-            audio.play().catch(() => {});
-        }
+    item.addEventListener('click', (e) => {
+        audio.play().catch(() => {}); // play audio
+        // Link navigation happens automatically after this
     });
 });
+
+// ------------------------
+// Optional: unlock audio on first user interaction (mobile Safari fix)
+// ------------------------
+let audioUnlocked = false;
+
+function unlockAudio() {
+    if (!audioUnlocked) {
+        const testAudio = new Audio();
+        testAudio.play().catch(() => {});
+        testAudio.pause();
+        testAudio.currentTime = 0;
+        audioUnlocked = true;
+
+        // Remove listeners after first interaction
+        document.body.removeEventListener('click', unlockAudio);
+        document.body.removeEventListener('touchstart', unlockAudio);
+    }
+}
+
+// Listen for first interaction to allow audio to play on mobile
+document.body.addEventListener('click', unlockAudio);
+document.body.addEventListener('touchstart', unlockAudio);
