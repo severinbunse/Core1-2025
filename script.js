@@ -4,16 +4,15 @@ nameItems.forEach((item) => {
     const audio = new Audio(item.dataset.audio);
     audio.preload = 'auto';
 
-    // Flag to track whether audio is playing
     let isPlaying = false;
+    let touchStartedOnItem = false;
 
     // When finger touches the item
     item.addEventListener('touchstart', (e) => {
-        if (!isPlaying) {
-            audio.currentTime = 0;
-            audio.play().catch(() => {});
-            isPlaying = true;
-        }
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        isPlaying = true;
+        touchStartedOnItem = true;
     });
 
     // When finger moves, check if still on this item
@@ -27,14 +26,13 @@ nameItems.forEach((item) => {
             touch.clientY < rect.top ||
             touch.clientY > rect.bottom
         ) {
-            // Finger moved outside this item → stop audio
             if (isPlaying) {
                 audio.pause();
                 audio.currentTime = 0;
                 isPlaying = false;
+                touchStartedOnItem = false; // canceled swipe
             }
         } else {
-            // Finger is over the item → ensure audio is playing
             if (!isPlaying) {
                 audio.currentTime = 0;
                 audio.play().catch(() => {});
@@ -43,12 +41,14 @@ nameItems.forEach((item) => {
         }
     });
 
-    // When finger lifts → stop audio
-    item.addEventListener('touchend', () => {
+    // When finger lifts → stop audio and navigate if touch started on this item
+    item.addEventListener('touchend', (e) => {
         if (isPlaying) {
             audio.pause();
             audio.currentTime = 0;
             isPlaying = false;
         }
-    });
-});
+
+        if (touchStartedOnItem) {
+            // Navigate to link inside this item
+            const
