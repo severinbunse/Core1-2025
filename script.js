@@ -4,28 +4,51 @@ nameItems.forEach((item) => {
     const audio = new Audio(item.dataset.audio);
     audio.preload = 'auto';
 
-    const link = item.querySelector('a');
+    let isPlaying = false;
+    let touchStartedOnItem = false;
 
-    // Touch start: play audio + apply hover style
+    // When finger touches the item
     item.addEventListener('touchstart', (e) => {
         audio.currentTime = 0;
         audio.play().catch(() => {});
-
-        // Add hover effect
-        link.style.fontStyle = 'italic';
+        isPlaying = true;
+        touchStartedOnItem = true;
     });
 
-    // Touch end: stop audio + remove hover + navigate
-    item.addEventListener('touchend', (e) => {
-        audio.pause();
-        audio.currentTime = 0;
+    // When finger moves, check if still on this item
+    item.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const rect = item.getBoundingClientRect();
 
-        // Remove hover effect
-        link.style.fontStyle = '';
-
-        // Navigate to link
-        if (link && link.href) {
-            window.location = link.href;
+        if (
+            touch.clientX < rect.left ||
+            touch.clientX > rect.right ||
+            touch.clientY < rect.top ||
+            touch.clientY > rect.bottom
+        ) {
+            if (isPlaying) {
+                audio.pause();
+                audio.currentTime = 0;
+                isPlaying = false;
+                touchStartedOnItem = false; // canceled swipe
+            }
+        } else {
+            if (!isPlaying) {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+                isPlaying = true;
+            }
         }
     });
-});
+
+    // When finger lifts → stop audio and navigate if touch started on this item
+    item.addEventListener('touchend', (e) => {
+        if (isPlaying) {
+            audio.pause();
+            audio.currentTime = 0;
+            isPlaying = false;
+        }
+
+        if (touchStartedOnItem) {
+            // Navigate to link inside this item
+            const
