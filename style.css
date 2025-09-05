@@ -1,54 +1,34 @@
-html, body {
+const nameItems = document.querySelectorAll('.name-item');
 
-    overflow: hidden;
-}
+nameItems.forEach((item) => {
+    const audio = new Audio(item.dataset.audio);
+    audio.preload = 'auto';
 
-body {
-    font-size: 4vh;
-    background-size: auto 500px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    transition: background-image 1s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    color: black;
-    overflow: hidden; /* prevent accidental scroll */
-    height: 100dvh;
-}
+    const link = item.querySelector('a');
 
+    item.addEventListener('touchstart', (e) => {
+        // Prevent the default link behavior so we can control when navigation happens
+        e.preventDefault();
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-    line-height: 1; /* Adjust this number to control spacing */
-}
+        // Play audio
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
 
-li {
-  margin: 0.2em 0; /* scales with font size */
-}
+        // Apply hover effect
+        link.classList.add('hover-touch');
+    });
 
-a {
-    text-decoration: none; /* Remove underline */
-    color: black; /* Ensure links are black too */
-}
+    item.addEventListener('touchend', (e) => {
+        // Stop audio
+        audio.pause();
+        audio.currentTime = 0;
 
-/* Desktop hover already exists */
-a:hover {
-    font-style: italic;
-}
+        // Remove hover effect
+        link.classList.remove('hover-touch');
 
-/* Mobile touch hover */
-a.hover-touch {
-    font-style: italic;
-}
-
-
-li.name-item {
-    -webkit-touch-callout: none; /* Disable long-press menu on iOS */
-    -webkit-user-select: none;   /* Optional: prevent text selection */
-}
+        // Navigate to link manually
+        if (link && link.href) {
+            window.location = link.href;
+        }
+    });
+});
