@@ -1,5 +1,5 @@
 body {
-    font-size: 30px;
+    font-size: 4vh;
     background-size: auto 500px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -20,12 +20,11 @@ ul {
     margin: 0;
     text-align: center;
     display: inline-block;
-     line-height: 1; /* Adjust this number to control spacing */
+    line-height: 1; /* Adjust this number to control spacing */
 }
 
 li {
-    text-align: center;
-    margin: 5px 0; /* Optional spacing between lines */
+  margin: 0.2em 0; /* scales with font size */
 }
 
 a {
