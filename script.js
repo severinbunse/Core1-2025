@@ -7,11 +7,14 @@ nameItems.forEach((item) => {
     const link = item.querySelector('a');
 
     item.addEventListener('touchstart', (e) => {
+        // Prevent the default link behavior so we can control when navigation happens
+        e.preventDefault();
+
         // Play audio
         audio.currentTime = 0;
         audio.play().catch(() => {});
 
-        // Apply hover effect by adding a class
+        // Apply hover effect
         link.classList.add('hover-touch');
     });
 
@@ -23,7 +26,7 @@ nameItems.forEach((item) => {
         // Remove hover effect
         link.classList.remove('hover-touch');
 
-        // Navigate to link
+        // Navigate to link manually
         if (link && link.href) {
             window.location = link.href;
         }
