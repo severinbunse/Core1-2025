@@ -37,9 +37,16 @@ a {
     color: black; /* Ensure links are black too */
 }
 
+/* Desktop hover already exists */
 a:hover {
     font-style: italic;
 }
+
+/* Mobile touch hover */
+a.hover-touch {
+    font-style: italic;
+}
+
 
 li.name-item {
     -webkit-touch-callout: none; /* Disable long-press menu on iOS */
