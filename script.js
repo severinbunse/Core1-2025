@@ -6,22 +6,22 @@ nameItems.forEach((item) => {
 
     const link = item.querySelector('a');
 
-    // Touch start: play audio + apply hover style
     item.addEventListener('touchstart', (e) => {
+        // Play audio
         audio.currentTime = 0;
         audio.play().catch(() => {});
 
-        // Add hover effect
-        link.style.fontStyle = 'italic';
+        // Apply hover effect by adding a class
+        link.classList.add('hover-touch');
     });
 
-    // Touch end: stop audio + remove hover + navigate
     item.addEventListener('touchend', (e) => {
+        // Stop audio
         audio.pause();
         audio.currentTime = 0;
 
         // Remove hover effect
-        link.style.fontStyle = '';
+        link.classList.remove('hover-touch');
 
         // Navigate to link
         if (link && link.href) {
