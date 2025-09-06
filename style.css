@@ -5,14 +5,15 @@ body {
     background-position: center center;
     transition: background-image 1s ease;
 
-    /* Flexbox for centering */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100dvh; /* <- changed from 100vh */
     margin: 0;
-    color: black; /* Make text black */
+    color: black;
+    overflow: hidden; /* prevent accidental scroll */
 }
+
 
 ul {
     list-style-type: none;
