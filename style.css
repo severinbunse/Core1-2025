@@ -1,12 +1,12 @@
 body {
     font-size: 4vh;
-    /* Flexbox for centering */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100dvh;
+    height: 100dvh; /* or try 100vh */
     margin: 0;
-    color: black; /* Make text black */
+    color: black;
+    overflow: hidden; /* prevent unwanted scrollbars */
 }
 
 ul {
