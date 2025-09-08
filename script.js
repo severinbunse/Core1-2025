@@ -1,54 +1,16 @@
+// Select all list items
 const nameItems = document.querySelectorAll('.name-item');
 
+// Add hover event listeners to each name item
 nameItems.forEach((item) => {
-    const audio = new Audio(item.dataset.audio);
-    audio.preload = 'auto';
+    const audio = new Audio(item.dataset.audio); // Get audio file from data attribute
 
-    let isPlaying = false;
-    let touchStartedOnItem = false;
-
-    // When finger touches the item
-    item.addEventListener('touchstart', (e) => {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-        isPlaying = true;
-        touchStartedOnItem = true;
+    item.addEventListener('mouseenter', () => {
+        audio.play();
     });
 
-    // When finger moves, check if still on this item
-    item.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const rect = item.getBoundingClientRect();
-
-        if (
-            touch.clientX < rect.left ||
-            touch.clientX > rect.right ||
-            touch.clientY < rect.top ||
-            touch.clientY > rect.bottom
-        ) {
-            if (isPlaying) {
-                audio.pause();
-                audio.currentTime = 0;
-                isPlaying = false;
-                touchStartedOnItem = false; // canceled swipe
-            }
-        } else {
-            if (!isPlaying) {
-                audio.currentTime = 0;
-                audio.play().catch(() => {});
-                isPlaying = true;
-            }
-        }
+    item.addEventListener('mouseleave', () => {
+        audio.pause();
+        audio.currentTime = 0; // Reset audio to the beginning
     });
-
-    // When finger lifts → stop audio and navigate if touch started on this item
-    item.addEventListener('touchend', (e) => {
-        if (isPlaying) {
-            audio.pause();
-            audio.currentTime = 0;
-            isPlaying = false;
-        }
-
-        if (touchStartedOnItem) {
-            // Navigate to link inside this item
-            const
+});

@@ -1,12 +1,12 @@
 body {
-    font-size: 4vh;
+    font-size: 3.7vh;
+    /* Flexbox for centering */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100dvh; /* or try 100vh */
+    height: 100dvh;
     margin: 0;
-    color: black;
-    overflow: hidden; /* prevent unwanted scrollbars */
+    color: black; /* Make text black */
 }
 
 ul {
@@ -15,7 +15,7 @@ ul {
     margin: 0;
     text-align: center;
     display: inline-block;
-    line-height: 1; /* Adjust this number to control spacing */
+    line-height: 0.9; /* Adjust this number to control spacing */
 }
 
 li {
