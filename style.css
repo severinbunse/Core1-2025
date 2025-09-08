@@ -64,8 +64,29 @@ a:hover {
     font-style: italic;
 }
 
+/* Overlay styling */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background-color: white; /* fills the screen */
+    color: black;
+    font-size: 3.7vh; /* matches your body font size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999; /* on top of everything */
+    cursor: pointer; /* indicate clickable */
+  }
+
 @media (max-width: 600px) {
     body {
         font-size: 3.1vh;
+    }
+        #overlay {
+      font-size: 3.1vh; /* match your mobile font size */
     }
 }
