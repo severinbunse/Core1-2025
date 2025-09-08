@@ -1,7 +1,6 @@
 body {
     font-size: 3.7vh;
     /* Flexbox for centering */
-    background-color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
