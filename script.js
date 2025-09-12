@@ -28,16 +28,21 @@ enterLink.addEventListener('click', function(e) {
 
 // this is for touch devices only
 
-const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
 if (isTouch) {
-  document.querySelectorAll("a.name").forEach(link => {
-    const sound = new Audio(link.dataset.sound);
+  document.querySelectorAll('.name-item a').forEach(link => {
+    const li = link.parentElement;
+    const audioSrc = li.dataset.audio;
 
-    link.addEventListener("click", e => {
-      e.preventDefault();
+    if (!audioSrc) return; // Skip if no audio file
+
+    const sound = new Audio(audioSrc);
+
+    link.addEventListener('click', e => {
+      e.preventDefault(); // Stop immediate navigation
       sound.currentTime = 0;
       sound.play();
+
+      // Navigate to the link after the audio ends
       sound.onended = () => {
         window.location.href = link.href;
       };
