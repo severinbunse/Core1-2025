@@ -24,3 +24,23 @@ enterLink.addEventListener('click', function(e) {
     e.preventDefault(); // Prevent link navigation
     overlay.style.display = 'none'; // Hide overlay immediately
 });
+
+
+// this is for touch devices only
+
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+if (isTouch) {
+  document.querySelectorAll("a.name").forEach(link => {
+    const sound = new Audio(link.dataset.sound);
+
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      sound.currentTime = 0;
+      sound.play();
+      sound.onended = () => {
+        window.location.href = link.href;
+      };
+    });
+  });
+}
