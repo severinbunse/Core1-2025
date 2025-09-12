@@ -26,26 +26,26 @@ enterLink.addEventListener('click', function(e) {
 });
 
 
-// this is for touch devices only
+// // this is for touch devices only
 
-if (isTouch) {
-  document.querySelectorAll('.name-item a').forEach(link => {
-    const li = link.parentElement;
-    const audioSrc = li.dataset.audio;
+// if (isTouch) {
+//   document.querySelectorAll('.name-item a').forEach(link => {
+//     const li = link.parentElement;
+//     const audioSrc = li.dataset.audio;
 
-    if (!audioSrc) return; // Skip if no audio file
+//     if (!audioSrc) return; // Skip if no audio file
 
-    const sound = new Audio(audioSrc);
+//     const sound = new Audio(audioSrc);
 
-    link.addEventListener('click', e => {
-      e.preventDefault(); // Stop immediate navigation
-      sound.currentTime = 0;
-      sound.play();
+//     link.addEventListener('click', e => {
+//       e.preventDefault(); // Stop immediate navigation
+//       sound.currentTime = 0;
+//       sound.play();
 
-      // Navigate to the link after the audio ends
-      sound.onended = () => {
-        window.location.href = link.href;
-      };
-    });
-  });
-}
+//       // Navigate to the link after the audio ends
+//       sound.onended = () => {
+//         window.location.href = link.href;
+//       };
+//     });
+//   });
+// }
